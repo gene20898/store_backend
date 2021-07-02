@@ -35,7 +35,7 @@ Table: products (id:varchar, name:varchar, price:number, category:varchar)
 - lastName
 - password
 
-Table: users (id:varchar, firstName:varchar, lastName:varchar, password:string)
+Table: users (id:varchar, username:varchar, firstName:varchar, lastName:varchar, password:string)
 
 #### Orders
 - id
