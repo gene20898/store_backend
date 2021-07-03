@@ -6,7 +6,9 @@ export class DashboardQueries {
     async topFiveProduct(): Promise<{name: string, quantity: string}[]> {
         try {
             const conn = await Client.connect()
-            const sql = `SELECT name, quantity FROM products INNER JOIN (SELECT product_id, sum(quantity) AS quantity FROM order_product GROUP BY product_id) AS p2 ON id = p2.product_id ORDER BY quantity DESC LIMIT 5`;
+            const sql = `SELECT name, quantity FROM products INNER JOIN 
+            (SELECT product_id, sum(quantity) AS quantity FROM order_product GROUP BY product_id) AS p2 
+            ON id = p2.product_id ORDER BY quantity DESC LIMIT 5`;
  
             const result = await conn.query(sql);
             conn.release();
@@ -31,17 +33,17 @@ export class DashboardQueries {
         }
     }
 
-    async currentOrder(user_id: string): Promise<Order[]> {
+    async currentOrder(user_id: string): Promise<Order> {
         try {
             const conn = await Client.connect()
-            const sql = `SELECT * from orders WHERE user_id=($1) AND status='incomplete'`;
+            const sql = `SELECT * from orders WHERE user_id=($1) AND status='active'`;
  
             const result = await conn.query(sql, [user_id]);
             conn.release();
 
-            return result.rows;
+            return result.rows[0];
         } catch (error) {
-            throw new error(`Could not find current orders Error: ${error}`);
+            throw new error(`Could not find current order Error: ${error}`);
         }
     }
 

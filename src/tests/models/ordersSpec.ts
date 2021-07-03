@@ -1,10 +1,8 @@
-import { Order, OrderStore } from "../../models/orders";
-import { Product, ProductStore } from "../../models/products";
-import { User, UserStore } from "../../models/user";
+import { OrderStore } from "../../models/orders";
+import { ProductStore } from "../../models/products";
 
 const orderStore = new OrderStore;
 const productStore = new ProductStore;
-const userStore = new UserStore;
 
 describe('Order Model', () => {
     it('should have an index method', () => {
@@ -28,19 +26,13 @@ describe('Order Model', () => {
       });
 
       it('create method should add a order', async () => {
-        await userStore.create({
-            username: 'Steve007',
-            firstName: 'Steve',
-            lastName: 'Lee',
-            password_digest: 'testuser'
-          })
         const result = await orderStore.create({
-          status: "incomplete",
+          status: "active",
           user_id: 1
         })
          expect(result).toEqual({
           id: 1,
-          status: "incomplete",
+          status: "active",
           user_id: 1
         });
       });
@@ -49,7 +41,7 @@ describe('Order Model', () => {
         const result = await orderStore.index();
         expect(result).toEqual([{
           id: 1,
-          status: "incomplete",
+          status: "active",
           user_id: 1
         }]);
       });
@@ -58,17 +50,12 @@ describe('Order Model', () => {
         const result = await orderStore.show("1");
         expect(result).toEqual({
           id: 1,
-          status: "incomplete",
+          status: "active",
           user_id: 1
         });
       });
 
       it('should add product to order', async () => {
-        await productStore.create({
-          name: 'knife',
-          price: 199,
-          category: 'tool'
-        });
         const result = await orderStore.addProduct({
           order_id: 1,
           product_id : 1,

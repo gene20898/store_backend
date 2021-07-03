@@ -1,7 +1,4 @@
 import { DashboardQueries } from "../../services/dashboard";
-import { Product, ProductStore } from "../../models/products";
-import { Order } from "../../models/orders";
-import { hash } from "bcrypt";
 
 const dashboard = new DashboardQueries;
 
@@ -25,13 +22,13 @@ describe('DashboardQueries Services', () => {
             category: 'tool'
         }]);
     });
-    it('currentOrder method should return the incomplete order from user id', async () => {
+    it('currentOrder method should return the active order from user id', async () => {
         const result = await dashboard.currentOrder('1')
-        expect(result).toEqual([{
+        expect(result).toEqual({
             id: 1,
-            user_id: 1,
-            status: 'incomplete'
-        }]);
+            status: 'active',
+            user_id: 1
+        });
     });
     it('currentOrder method should return the complete order from user id', async () => {
         const result = await dashboard.completeOrder('1')
