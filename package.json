@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node src/server.ts",
-    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
+    "start": "ts-node src/server.ts",
+    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "SET ENV=test&& db-migrate db:create store_backend_test&&db-migrate --env test up && jasmine-ts && db-migrate db:drop store_backend_test",
     "tsc": "tsc"
   },
@@ -26,6 +26,8 @@
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.9",
     "@types/jasmine": "^3.6.3",
+    "@types/jsonwebtoken": "^8.5.3",
+    "@types/node": "^16.0.0",
     "@types/pg": "^8.6.0",
     "@types/supertest": "^2.0.11",
     "db-migrate": "^0.11.12",

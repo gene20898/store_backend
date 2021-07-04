@@ -71,4 +71,20 @@ export class UserStore {
             throw new error(`Could not delete product ${id}. Error: ${error}`);
         }
     }
+
+    async authenticate(username: string, password: string): Promise<User | null> {
+        const conn = await Client.connect()
+        const sql = 'SELECT * FROM users WHERE username=($1)'
+    
+        const result = await conn.query(sql, [username])
+        
+        if(result.rows.length) {
+          const user = result.rows[0]
+          
+          if (bcrypt.compareSync(password+process.env.PEPPER, user.password_digest)) {
+            return user
+          }
+        }
+        return null
+    }
 }

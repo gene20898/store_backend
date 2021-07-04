@@ -1,4 +1,4 @@
-import { UserStore } from "../../models/user";
+import { User, UserStore } from "../../models/user";
 import bcrypt from 'bcrypt';
 
 const store = new UserStore;
@@ -17,6 +17,10 @@ describe('User Model', () => {
       });
 
       it('should have a delete method', () => {
+        expect(store.delete).toBeDefined();
+      });
+
+      it('should have a authenticate method', () => {
         expect(store.delete).toBeDefined();
       });
 
@@ -44,4 +48,9 @@ describe('User Model', () => {
         const result = await store.show("2");
         expect(bcrypt.compareSync('testpass'+process.env.PEPPER,result.password_digest)).toBeTruthy();
       } )
+
+      it('authenticate method should return the correct user', async () => {
+        const result = await store.authenticate('Peter01', 'testpass') as User;
+        expect(result.id).toEqual(2);
+      });
 });

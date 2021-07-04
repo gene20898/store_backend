@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
 import cors from 'cors'
 import dashboardRoutes from './handlers/dashboardRoutes'
 import productRoutes from './handlers/productRoutes'
@@ -8,7 +8,7 @@ const app: express.Application = express()
 const address: string = "0.0.0.0:3000"
 
 app.use(express.json())
-app.use(cors())
+app.use(cors()) 
 
 dashboardRoutes(app)
 productRoutes(app)

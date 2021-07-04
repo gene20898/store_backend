@@ -1,5 +1,6 @@
 import express, {Request, Response} from 'express';
 import { Product, ProductStore } from '../models/products';
+import verifyAuthToken from '../services/authentication';
 
 const store = new ProductStore;
 
@@ -20,7 +21,7 @@ const create = async (req:Request, res:Response) => {
             price: req.body.price,
             category: req.body.category
         };
-
+                
         const newProduct = await store.create(product)
         res.json(newProduct)
     } catch(err) {
@@ -32,7 +33,7 @@ const create = async (req:Request, res:Response) => {
 const productRoutes = (app: express.Application) => {
     app.get('/products', index)
     app.get('/products/:id', show)
-    app.post('/products', create)
+    app.post('/products', verifyAuthToken, create)
 }
 
 export default productRoutes

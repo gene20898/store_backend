@@ -2,7 +2,6 @@ import { OrderStore } from "../../models/orders";
 import { ProductStore } from "../../models/products";
 
 const orderStore = new OrderStore;
-const productStore = new ProductStore;
 
 describe('Order Model', () => {
     it('should have an index method', () => {
