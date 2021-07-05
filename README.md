@@ -15,17 +15,18 @@ in psql run the following:
 ```
 CREATE USER store_backend_user WITH PASSWORD 'password123';
 CREATE DATABASE store_backend_dev;
-\c full_stack_dev
-GRANT ALL PRIVILEGES ON DATABASE full_stack_dev TO full_stack_user;
+\c store_backend_dev
+GRANT ALL PRIVILEGES ON DATABASE store_backend_dev TO store_backend_user;
+ALTER USER store_backend_user WITH SUPERUSER;
 ```
-*password and user can be any other name but it need to match with .env file*
+*password and user can be any other name but it need to match with .env and database.json file*
 
 4. create .env file in the repository
 in .env file enter the value of following variables:
 ```
-BCRYPT_PASSWORD=bcryptgene20898bcrypt
+BCRYPT_PASSWORD=**insert your secret text here**
 SALT_ROUNDS= 10
-PEPPER= **insert your secret text here**
+PEPPER=**insert your secret text here**
 
 POSTGRES_HOST=127.0.0.1
 POSTGRES_DB=store_backend_dev
@@ -34,15 +35,15 @@ POSTGRES_USER=store_backend_user
 POSTGRES_PASSWORD=password123
 ENV=dev
 
-TOKEN_SECRET=**inseert your secret text here**
+TOKEN_SECRET=gene20898tokensecret
 ```
 5. in the terminal enter the project repo and run the following:
-``` npx run db-migrate up```
+```
+npm install
+npx db-migrate up
+```
 
 # Start the server
-install package dependency
-```npm install```
-
 start by run
 ```npm run start```
 
