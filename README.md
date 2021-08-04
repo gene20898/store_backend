@@ -52,23 +52,23 @@ start by run
 **Create user:** send POST request to http://localhost:3000/users with the body in JSON format as following:
 ```
 {
-  "username":
-  "firstName":
-  "lastName":
-  "password":
+  "username":"Steven123",
+  "firstName":"Steven",
+  "lastName":"Smith",
+  "password":"password1234"
 }
 ```
 **Authenticate:** send POST request to http://localhost:3000/users/authenticate with the body in JSON format as following:
 ```
 {
-  "username":
-  "password":
+  "username":"Steven123",
+  "password":"password1234"
 }
 ```
 **Show:** send GET request to http://localhost:3000/users/:id with the body in JSON format as following [required JTWs token]:
 ```
 {
-  "id":
+  "id":1
 }
 ```
 **Index:** send GET request to http://localhost:3000/users [required JTWs token]
@@ -77,15 +77,15 @@ start by run
 **Create:** send POST request to http://localhost:3000/products with the body in JSON format as following [required JTWs token]:
 ```
 {
-  "name":
-  "price":
-  "category"
+  "name":"mango_tree"
+  "price":120
+  "category":"plant"
 }
 ```
 **Show:** send GET request to http://localhost:3000/product/:id with the body in JSON format as following:
 ```
 {
-  "id":
+  "id":1
 }
 ```
 **Index:** send GET request to http://localhost:3000/products
@@ -96,18 +96,18 @@ start by run
 **Get products from category:** send GET request to http://localhost:3000/dashboard/products/:category with the body in JSON format as following [required JTWs token]:
 ```
 {
-  "category":
+  "category":"plant"
 }
 ```
 **Get current order from user id:** send GET request to app.get http://localhost:3000/dashboard/orders/current/:user_id with the body in JSON format as following [required JTWs token]:
 ```
 {
-  "user_id":
+  "user_id":1
 }
 ```
 **Get complete order from user id:** send GET request to app.get http://localhost:3000/dashboard/orders/complete/:user_id with the body in JSON format as following [required JTWs token]:
 ```
 {
-  "user_id":
+  "user_id":1
 }
 ```
